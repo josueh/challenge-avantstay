@@ -1,0 +1,6 @@
+**/*.md
+**/data/**/*.json
+
+public
+.next
+.vercel
