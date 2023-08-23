@@ -12,4 +12,10 @@ describe(HomesNotFound, () => {
     const matchedElements = screen.queryAllByText(/california/i)
     expect(matchedElements.length).toBeGreaterThan(0)
   })
+
+  it('renders an image `Satellite` with an infinite animation', () => {
+    render(<HomesNotFound />)
+    const image = screen.getByAltText(/satellite/i)
+    expect(image).toHaveStyleRule('animation', /infinite/g)
+  })
 })
