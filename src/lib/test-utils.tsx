@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
+import { QueryStringContextProvider } from '~/contexts'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>
+  return <QueryStringContextProvider initialSearchUrl="">{children}</QueryStringContextProvider>
 }
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
