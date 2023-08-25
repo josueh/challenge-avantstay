@@ -1,11 +1,19 @@
+'use client'
+import { useSearchParams } from 'next/navigation'
+import { QueryStringContextProvider } from '~/contexts'
 import { HomesNotFound } from '~/components/homes-not-found'
 import styles from './page.module.css'
 
 export default function Home() {
+  const searchParams = useSearchParams()
+  const searchUrl = searchParams?.toString()
+
   return (
-    <main className={styles.main}>
-      <h1>Challenge AvantStay</h1>
-      <HomesNotFound />
-    </main>
+    <QueryStringContextProvider initialSearchUrl={searchUrl}>
+      <main className={styles.main}>
+        <h1>Challenge AvantStay</h1>
+        <HomesNotFound />
+      </main>
+    </QueryStringContextProvider>
   )
 }
