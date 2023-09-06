@@ -3,6 +3,7 @@ import { useSearchParams } from 'next/navigation'
 import { QueryStringContextProvider } from '~/contexts'
 import { InputSearchText } from '~/components/input-search-text'
 import { HomesNotFound } from '~/components/homes-not-found'
+import { SelectRegionList } from '~/components/select-region-list'
 import styles from './page.module.css'
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1>Challenge AvantStay</h1>
         <InputSearchText />
+        <SelectRegionList />
         <HomesNotFound />
       </main>
     </QueryStringContextProvider>
