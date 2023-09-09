@@ -1,7 +1,7 @@
 describe('Home', () => {
-  it('should render "AvantStay" message', () => {
+  it('should render "AvantStay" logo', () => {
     cy.visit('/')
-    cy.contains(/avantstay/i).should('be.visible')
+    cy.get('img[alt="AvantStay"]').should('be.visible')
   })
 
   it('should load and render query string `query` when defined', () => {
