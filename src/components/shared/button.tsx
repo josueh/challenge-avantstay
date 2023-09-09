@@ -1,9 +1,7 @@
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { typography } from '~/styles'
 
-type variant = 'outline' | 'filled'
-
-export const Button = styled.button<{ $variant?: variant }>`
+export const Button = styled.button`
   ${typography['text-bold']}
   font-size: 14px;
   cursor: pointer;
@@ -22,11 +20,9 @@ export const Button = styled.button<{ $variant?: variant }>`
     color: #34aebc;
     transition: none;
   }
-  ${(props) =>
-    props.$variant === 'outline' &&
-    css`
-      border-color: transparent;
-    `}
+  &.outline {
+    border-color: transparent;
+  }
 `
 
 export const ButtonWide = styled(Button)`
