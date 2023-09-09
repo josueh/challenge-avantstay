@@ -20,7 +20,7 @@ export const AppHeader = () => {
           <NavigationBar />
         </UI.Column>
         <UI.Column>
-          <Button $variant="outline">Sign In</Button>
+          <Button className="outline">Sign In</Button>
           <Button>Sign Up</Button>
         </UI.Column>
       </UI.Center>
