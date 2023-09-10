@@ -1,7 +1,7 @@
 'use client'
 import imgSatellite from '~/assets/satellite.svg'
 import * as UI from './homes-not-found.styles'
-import { ButtonWide } from '../shared/button'
+import { ButtonWide } from '../shared'
 
 type Props = {
   region?: string
