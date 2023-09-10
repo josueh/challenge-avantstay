@@ -4,7 +4,7 @@ import * as UI from './app-header.styles'
 import logoIcon from '~/assets/avantstay-icon.svg'
 import logoName from '~/assets/avantstay-name.svg'
 import { NavigationBar } from './navigation-bar'
-import { Button } from '../shared/button'
+import { Button } from '../shared'
 
 export const AppHeader = () => {
   return (
