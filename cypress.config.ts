@@ -5,5 +5,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000',
     defaultCommandTimeout: 15000,
   },
-  video: false,
+  screenshotOnRunFailure: true,
+  video: true,
 })

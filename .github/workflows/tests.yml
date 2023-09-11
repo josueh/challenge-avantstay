@@ -48,3 +48,10 @@ jobs:
       - name: Run E2E Tests
         run: npm run test:e2e
 
+      # saves cypress screenshots as artifacts
+      - name: Upload test:e2e artifacts
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots cypress/videos
