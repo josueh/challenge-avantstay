@@ -13,7 +13,6 @@ export const HomesNotFound = ({ region }: Props) => {
       <UI.AnimatedImage src={imgSatellite} alt="Satellite" />
       <p>Oops! We haven&apos;t found anything matching your search.</p>
       <p>Try something else or reset the filters to see all {region} homes.</p>
-      <br />
       <ButtonWide>See all {region} homes</ButtonWide>
     </UI.Wrapper>
   )

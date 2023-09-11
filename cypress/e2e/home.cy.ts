@@ -1,7 +1,19 @@
 describe('Home', () => {
-  it('should render "AvantStay" logo', () => {
+  beforeEach(() => {
     cy.visit('/')
+  })
+
+  it('should render "AvantStay" logo', () => {
     cy.get('img[alt="AvantStay"]').should('be.visible')
+  })
+
+  it('should render loading message', () => {
+    cy.contains('PLEASE WAIT').should('be.visible')
+  })
+
+  it('should render `Bedrooms` and `Budget Season` information', () => {
+    cy.contains('Bedrooms').should('be.visible')
+    cy.contains('Budget Season').should('be.visible')
   })
 
   it('should load and render query string `query` when defined', () => {
@@ -10,7 +22,6 @@ describe('Home', () => {
   })
 
   it('should update query strings `query` when search input changes', () => {
-    cy.visit('/')
     cy.get('input[name=search-text]').type('killing bugs')
     cy.url().should('match', /killing.*bugs/i)
   })

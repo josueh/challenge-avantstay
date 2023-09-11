@@ -1,12 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { HomesNotFound } from '../homes-not-found'
+import React from 'react'
 import { InputSearchText } from '../input-search-text'
 import { SelectRegionList } from '../select-region-list'
-import { Space } from '../shared/space'
+import { LoadingMore, VisibilityObserver } from '../shared'
 import * as UI from './app-page-homes.styles'
 import { MainTitle } from './main-title'
 import { useRouter } from 'next/navigation'
+import { CardHome } from '../card-home'
+import { useHomesAPI } from '~/hooks/homes-api'
+import { HomesNotFound } from '../homes-not-found'
+import { TestOnly } from '../shared/test-only'
 
 type Props = {
   regionName?: string
@@ -14,12 +17,7 @@ type Props = {
 
 export const AppPageHomes = ({ regionName }: Props) => {
   const router = useRouter()
-  const [fakeTotal, setFakeTotal] = useState(0)
-
-  useEffect(() => {
-    const time = setTimeout(() => setFakeTotal(32), 1000)
-    return () => void clearTimeout(time)
-  }, [])
+  const { loading, error, total, homes, loadMore } = useHomesAPI({ regionName })
 
   function handleSelectRegion(region: string) {
     const empty = region === 'Any region'
@@ -28,14 +26,31 @@ export const AppPageHomes = ({ regionName }: Props) => {
 
   return (
     <UI.Wrapper>
-      <MainTitle loading={!fakeTotal} total={fakeTotal} />
-      <Space height={30} />
-      <UI.RegionName>{regionName ?? 'All homes'}</UI.RegionName>
-      <Space height={20} />
-      <InputSearchText />
-      <Space height={20} />
-      <SelectRegionList initialValue={regionName} onChange={handleSelectRegion} />
-      <HomesNotFound />
+      {error ? null : <MainTitle loading={loading} total={total} />}
+      <TestOnly>
+        <UI.RegionName>{regionName ?? 'All homes'}</UI.RegionName>
+        <InputSearchText />
+        <SelectRegionList initialValue={regionName} onChange={handleSelectRegion} />
+      </TestOnly>
+      {error ? (
+        <HomesNotFound region={regionName} />
+      ) : (
+        <UI.Cards>
+          {homes.map((home, index) => (
+            <React.Fragment key={index.toString() + home.id}>
+              <CardHome loading={loading} data={home} />
+              {index + 1 === homes.length ? null : <UI.CardSeparator />}
+            </React.Fragment>
+          ))}
+        </UI.Cards>
+      )}
+      <UI.Footer>
+        {!error && homes.length < total ? (
+          <VisibilityObserver onVisible={loadMore}>
+            <LoadingMore>Loading more homes</LoadingMore>
+          </VisibilityObserver>
+        ) : null}
+      </UI.Footer>
     </UI.Wrapper>
   )
 }

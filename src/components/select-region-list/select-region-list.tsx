@@ -1,17 +1,11 @@
 'use client'
 import { useMemo } from 'react'
 import { graphql } from '~/hooks/graphql'
+import type { Region } from '~/graphql'
 
 type Props = {
   initialValue?: string
   onChange?: (regionName: string) => void
-}
-
-type Region = {
-  id: string
-  name: string
-  stateCode: string
-  stateName: string
 }
 
 const DEFAULT_OPTION = 'Any region'
