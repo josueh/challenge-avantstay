@@ -12,8 +12,8 @@ describe('Home', () => {
   })
 
   it('should render `Bedrooms` and `Budget Season` information', () => {
-    cy.contains('Bedrooms').should('be.visible')
-    cy.contains('Budget Season').should('be.visible')
+    cy.contains(/Bedrooms/i).should('be.visible')
+    cy.contains(/Budget Season/i).should('be.visible')
   })
 
   it('should load and render query string `query` when defined', () => {
