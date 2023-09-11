@@ -4,4 +4,10 @@ describe('Regions', () => {
     cy.visit(`/regions/${regionName}`)
     cy.contains(regionName).should('be.visible')
   })
+
+  it('should render "Bedrooms" information', () => {
+    const regionName = 'Breckenridge'
+    cy.visit(`/regions/${regionName}`)
+    cy.contains(/\d+\sbedrooms/i).should('be.visible')
+  })
 })
