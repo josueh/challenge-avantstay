@@ -16,4 +16,8 @@ describe(MainTitle, () => {
     render(<MainTitle loading={false} total={0} />)
     expect(screen.getByText(/0/i)).toBeInTheDocument()
   })
+  it('renders `home` in singular when total is just one', () => {
+    render(<MainTitle loading={false} total={1} />)
+    expect(screen.queryByText(/homes/i)).not.toBeInTheDocument()
+  })
 })
