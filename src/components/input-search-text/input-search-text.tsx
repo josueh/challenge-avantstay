@@ -9,7 +9,6 @@ export const InputSearchText = () => {
   return (
     <>
       <pre>{JSON.stringify(queryString)}</pre>
-      <br />
       <input
         name="search-text"
         placeholder="Type query here..."

@@ -4,7 +4,7 @@ import { typography } from '~/styles'
 export const Wrapper = styled.header`
   ${typography['text-regular']};
   width: 100%;
-  padding: 14px 45px;
+  padding: 14px 0;
 `
 
 export const Label = styled.div`
