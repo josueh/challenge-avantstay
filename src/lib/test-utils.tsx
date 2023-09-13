@@ -6,16 +6,22 @@ import { graphqlMocks } from '~/graphql/index-mocks'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 
-const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
+jest.mock('next/navigation', () => ({
+  useSearchParams: () => ({
+    toString: () => '',
+  }),
+}))
+
+const TestAppProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <QueryStringContextProvider initialSearchUrl="">
+    <QueryStringContextProvider>
       <ApolloMockedProvider mocks={graphqlMocks}>{children}</ApolloMockedProvider>
     </QueryStringContextProvider>
   )
 }
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { wrapper: AllTheProviders, ...options })
+  render(ui, { wrapper: TestAppProviders, ...options })
 
 export * from '@testing-library/react'
 export { customRender as render }
