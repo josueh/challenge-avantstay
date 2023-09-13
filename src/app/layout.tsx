@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { StyledComponentsRegistry } from '~/lib/styled-components-registry'
 import { ApolloProvider } from '~/lib/apollo-provider'
 import { AppHeader } from '~/components/app-header/app-header'
+import { QueryStringContextProvider } from '~/contexts'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +17,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <ApolloProvider>
-            <AppHeader />
-            {children}
-          </ApolloProvider>
-        </StyledComponentsRegistry>
+        <AppProviders>
+          <AppHeader />
+          {children}
+        </AppProviders>
       </body>
     </html>
+  )
+}
+
+function AppProviders({ children }: { children: React.ReactNode }) {
+  return (
+    <StyledComponentsRegistry>
+      <QueryStringContextProvider>
+        <ApolloProvider>{children}</ApolloProvider>
+      </QueryStringContextProvider>
+    </StyledComponentsRegistry>
   )
 }

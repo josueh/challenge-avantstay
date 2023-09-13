@@ -5,6 +5,7 @@ import logoIcon from '~/assets/avantstay-icon.svg'
 import logoName from '~/assets/avantstay-name.svg'
 import { NavigationBar } from './navigation-bar'
 import { Button } from '../shared'
+import { Filters } from './filters'
 
 export const AppHeader = () => {
   return (
@@ -23,6 +24,9 @@ export const AppHeader = () => {
           <Button className="outline">Sign In</Button>
           <Button>Sign Up</Button>
         </UI.Column>
+      </UI.Center>
+      <UI.Center>
+        <Filters />
       </UI.Center>
     </UI.Wrapper>
   )
