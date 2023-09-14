@@ -13,7 +13,7 @@ type Props = {
 
 export const QueryStringContextProvider = ({ children }: Props) => {
   const searchParams = useSearchParams().toString()
-  const value = useQueryStringState({ initialSearchUrl: searchParams })
+  const value = useQueryStringState({ initialSearchParams: searchParams })
   return <QueryStringContext.Provider value={value}>{children}</QueryStringContext.Provider>
 }
 

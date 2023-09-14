@@ -1,4 +1,4 @@
-'use client'
+import { AppHeader } from '~/components/app-header'
 import { AppPageHomes } from '~/components/app-page-homes'
 
 type PageProps = {
@@ -8,5 +8,11 @@ type PageProps = {
 }
 
 export default function HomesByRegionName({ params: { regionName } }: PageProps) {
-  return <AppPageHomes regionName={decodeURI(regionName)} />
+  regionName = decodeURI(regionName)
+  return (
+    <>
+      <AppHeader regionName={regionName} />
+      <AppPageHomes regionName={regionName} />
+    </>
+  )
 }

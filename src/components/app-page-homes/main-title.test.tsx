@@ -2,9 +2,10 @@ import { render, screen } from '~/lib/test-utils'
 import { MainTitle } from './main-title'
 
 describe(MainTitle, () => {
-  it('renders `Loading` message', () => {
+  it('renders `Loading homes` message', () => {
     render(<MainTitle loading />)
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
+    expect(screen.getByText(/homes/i)).toBeInTheDocument()
   })
 
   it('renders `32` when total is defined', () => {
