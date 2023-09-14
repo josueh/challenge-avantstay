@@ -18,6 +18,13 @@ export const Wrapper = styled.section`
   button {
     margin-top: 30px;
   }
+  &.page-center {
+    position: absolute;
+    inset: 0;
+    height: 100vh;
+    padding-top: 5%;
+    justify-content: center;
+  }
 `
 
 export const AnimatedImage = styled(Image)`
