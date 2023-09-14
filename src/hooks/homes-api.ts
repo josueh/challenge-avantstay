@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { graphql } from './graphql'
 import type { Home } from '~/graphql'
+import { useRegionsAPI } from './regions-api'
 
 const PAGE_SIZE = 15
 const PLACEHOLDERS_EMPTY_HOMES = [1, 2, 3].map((i) => ({ id: i }))
@@ -10,10 +11,8 @@ type Props = {
 }
 
 export const useHomesAPI = ({ regionName }: Props) => {
-  const queryRegions = graphql.useQuery('GET_ALL_REGIONS')
-  const region = queryRegions.data?.regions?.find(
-    (i: any) => i.name.toUpperCase() === regionName?.toUpperCase()
-  )
+  const queryRegions = useRegionsAPI({ regionName })
+  const region = queryRegions.selectedRegion
 
   const [page, setPage] = useState(1)
   const { loading, data, fetchMore } = graphql.useQuery('GET_HOMES', {
