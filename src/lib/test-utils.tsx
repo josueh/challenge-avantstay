@@ -7,9 +7,10 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 
 jest.mock('next/navigation', () => ({
-  useSearchParams: () => ({
-    toString: () => '',
+  useRouter: () => ({
+    push: jest.fn,
   }),
+  useSearchParams: jest.fn,
 }))
 
 const TestAppProviders = ({ children }: { children: React.ReactNode }) => {

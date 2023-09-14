@@ -1,22 +1,7 @@
 import { styled } from 'styled-components'
 
-export const Wrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  height: 50px;
-`
-export const Group = styled.div`
-  flex: 1;
-  display: flex;
-  border: 1px solid #e8eff5;
-  border-radius: 3px;
-  &:last-child {
-    flex: 0.4;
-    max-width: 200px;
-  }
-`
 export const InputField = styled.input``
+
 export const InputArea = styled.div`
   position: relative;
   min-width: 120px;
@@ -50,11 +35,15 @@ export const InputArea = styled.div`
     border: 0;
   }
   .text-value {
+    overflow: hidden;
     pointer-events: none;
     position: absolute;
     bottom: 10px;
     left: 15px;
     right: 10px;
+    padding-right: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 12px;
     color: #022b54;
     span {

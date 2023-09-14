@@ -2,6 +2,9 @@ import { styled } from 'styled-components'
 import { display } from '~/styles'
 
 export const Wrapper = styled.header`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   isolation: isolate;
   position: fixed;
   z-index: 1;

@@ -7,7 +7,7 @@ import { NavigationBar } from './navigation-bar'
 import { Button } from '../shared'
 import { Filters } from './filters'
 
-export const AppHeader = () => {
+export const AppHeader = ({ regionName }: { regionName?: string }) => {
   return (
     <UI.Wrapper>
       <UI.Center>
@@ -26,7 +26,7 @@ export const AppHeader = () => {
         </UI.Column>
       </UI.Center>
       <UI.Center>
-        <Filters />
+        <Filters initialRegionName={regionName} />
       </UI.Center>
     </UI.Wrapper>
   )

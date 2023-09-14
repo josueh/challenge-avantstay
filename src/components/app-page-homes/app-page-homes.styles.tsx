@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { typography } from '~/styles'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   padding: 0 30px;
   max-width: 860px;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 155px;
 `
 
 export const RegionName = styled.div`

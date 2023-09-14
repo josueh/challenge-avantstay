@@ -1,36 +1,52 @@
 'use client'
-import { useState, useCallback, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useCallback } from 'react'
 
 type QueryStringParams = {
-  query: string | null
-  startDate: string | null
-  endDate: string | null
+  query?: string
+  startDate?: string
+  endDate?: string
 }
 
 const EMPTY_STATE: QueryStringParams = {
-  query: null,
-  startDate: null,
-  endDate: null,
+  query: undefined,
+  startDate: undefined,
+  endDate: undefined,
 }
 
-export const useQueryStringState = ({ initialSearchUrl }: { initialSearchUrl: string }) => {
-  const [queryString, setQueryString] = useState<QueryStringParams>(
-    parseUrlToState(initialSearchUrl)
-  )
-
-  useEffect(() => {
-    syncCurrentUrlWithQuery(queryString)
-  }, [queryString])
+export const useQueryStringState = ({ initialSearchParams }: { initialSearchParams: string }) => {
+  const router = useRouter()
+  const queryString: QueryStringParams = parseUrlToState(initialSearchParams)
 
   const clearQueryStrings = useCallback(() => {
-    setQueryString({ ...EMPTY_STATE })
-  }, [])
+    router.push(``, { scroll: false })
+  }, [router])
 
-  const addQueryString = useCallback((key: keyof QueryStringParams, value?: string) => {
-    setQueryString((prev) => ({ ...prev, [key]: value }))
-  }, [])
+  const addQueryString = useCallback(
+    (key: keyof QueryStringParams, value?: string) => {
+      queryString[key] = value
+      const params = new URLSearchParams()
+      Object.entries(queryString).forEach(([key, value]) => {
+        if (value !== undefined) {
+          params.append(key, value)
+        }
+      })
+      router.push(`?` + params, { scroll: false })
+    },
+    [router, queryString]
+  )
 
-  return { queryString, clearQueryStrings, addQueryString }
+  const toString = useCallback(() => {
+    const params = new URLSearchParams()
+    Object.entries(queryString).forEach(([key, value]) => {
+      if (value !== undefined) {
+        params.append(key, value)
+      }
+    })
+    return `?` + params
+  }, [queryString])
+
+  return { data: queryString, clearQueryStrings, addQueryString, toString }
 }
 
 function parseUrlToState(searchUrl: string) {
@@ -40,20 +56,9 @@ function parseUrlToState(searchUrl: string) {
     return key in data
   }
   for (const [key, value] of params as any) {
-    if (isValidKey(key)) {
+    if (isValidKey(key) && value) {
       data[key] = value
     }
   }
   return data
-}
-
-function syncCurrentUrlWithQuery(queryString: QueryStringParams) {
-  const currentUrl = new URL(window.location.href)
-  currentUrl.search = ''
-  Object.entries(queryString).forEach(([key, value]) => {
-    if (value !== null) {
-      currentUrl.searchParams.set(key, value)
-    }
-  })
-  window.history.replaceState({}, '', currentUrl.toString())
 }

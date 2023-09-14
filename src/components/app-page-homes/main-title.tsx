@@ -12,7 +12,7 @@ export const MainTitle = ({ loading, total }: Props) => {
     <UI.Wrapper>
       <UI.Label>{message}</UI.Label>
       <UI.Title>
-        <b>{loading ? 'Loading' : total}</b> home{total && total > 1 ? 's' : ''}
+        <b>{loading ? 'Loading' : total}</b> home{total === 1 ? '' : 's'}
       </UI.Title>
     </UI.Wrapper>
   )

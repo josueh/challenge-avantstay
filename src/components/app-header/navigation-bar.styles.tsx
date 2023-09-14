@@ -17,7 +17,7 @@ export const Link = styled.a`
     content: ' ';
     position: absolute;
     left: 50%;
-    top: 28px;
+    top: 27px;
     width: 20px;
     height: 2px;
     background-color: transparent;
@@ -29,7 +29,8 @@ export const Link = styled.a`
   &:hover {
     color: #53c3d0;
   }
-  &:active {
+  &:active,
+  &.active {
     color: #53c3d0;
     &::before {
       background-color: #53c3d0;
