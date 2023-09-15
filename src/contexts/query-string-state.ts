@@ -3,15 +3,18 @@ import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 
 type QueryStringParams = {
-  query?: string
-  startDate?: string
-  endDate?: string
+  guests?: string
+  checkIn?: string
+  checkOut?: string
+  order?: string
 }
+type QueryStringKeys = keyof QueryStringParams
 
 const EMPTY_STATE: QueryStringParams = {
-  query: undefined,
-  startDate: undefined,
-  endDate: undefined,
+  guests: undefined,
+  checkIn: undefined,
+  checkOut: undefined,
+  order: undefined,
 }
 
 export const useQueryStringState = ({ initialSearchParams }: { initialSearchParams: string }) => {
@@ -23,8 +26,10 @@ export const useQueryStringState = ({ initialSearchParams }: { initialSearchPara
   }, [router])
 
   const addQueryString = useCallback(
-    (key: keyof QueryStringParams, value?: string) => {
-      queryString[key] = value
+    (data: QueryStringParams) => {
+      Object.keys(data).forEach((key) => {
+        queryString[key as QueryStringKeys] = data[key as QueryStringKeys]
+      })
       const params = new URLSearchParams()
       Object.entries(queryString).forEach(([key, value]) => {
         if (value !== undefined) {

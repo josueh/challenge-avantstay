@@ -3,7 +3,7 @@ import { graphql } from './graphql'
 import type { Home } from '~/graphql'
 import { useRegionsAPI } from './regions-api'
 
-const PAGE_SIZE = 15
+const PAGE_SIZE = 10
 const PLACEHOLDERS_EMPTY_HOMES = [1, 2, 3].map((i) => ({ id: i }))
 
 type Props = {
