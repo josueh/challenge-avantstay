@@ -3,12 +3,13 @@ import { styled } from 'styled-components'
 import { typography } from '~/styles'
 
 type Props = {
+  name?: string
   startDate?: Date | null
   endDate?: Date | null
   onChange?: ({ startDate, endDate }: { startDate: Date | null; endDate: Date | null }) => void
 }
 
-export const InputDateRange = ({ startDate, endDate, onChange }: Props) => {
+export const InputDateRange = ({ name, startDate, endDate, onChange }: Props) => {
   return (
     <Wrapper className="input-date-range">
       <DatePickerInput
@@ -17,6 +18,7 @@ export const InputDateRange = ({ startDate, endDate, onChange }: Props) => {
         mx="auto"
         maw={400}
         firstDayOfWeek={0}
+        name={name}
         defaultValue={[startDate ?? null, endDate ?? null]}
         onChange={([startDate, endDate]) => onChange?.({ startDate, endDate })}
       />
@@ -33,6 +35,9 @@ const Wrapper = styled.div`
   }
   button.mantine-DatePickerInput-calendarHeaderLevel {
     color: #022b54aa;
+  }
+  .mantine-DatePickerInput-input {
+    background-color: white;
   }
   .mantine-DatePickerInput-day {
     color: #022b54;

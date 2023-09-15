@@ -14,8 +14,8 @@ const DEFAULT_REGION = 'Any region'
 
 const orderOptions = [
   { value: 'RELEVANCE', label: 'Relevance' },
-  { value: 'PRICE_DESC', label: 'Lowest price first' },
-  { value: 'PRICE_ASC', label: 'Highest price first' },
+  { value: 'PRICE_ASC', label: 'Lowest price first' },
+  { value: 'PRICE_DESC', label: 'Highest price first' },
 ]
 
 const guestOptions = [
@@ -96,7 +96,7 @@ export const Filters = ({ initialRegionName }: { initialRegionName?: string }) =
           initialText={loading ? initialRegionName : labelRegion}
           initialValue={initialRegionName}
         >
-          <InputSelect data={regionOptions} onChange={handleSelectRegion} />
+          <InputSelect name="region" data={regionOptions} onChange={handleSelectRegion} />
         </FilterInputArea>
         <FilterInputArea
           flexGrow={1.5}
@@ -105,6 +105,7 @@ export const Filters = ({ initialRegionName }: { initialRegionName?: string }) =
           initialText={labelPeriod}
         >
           <InputDateRange
+            name="period"
             startDate={checkIn ? new Date(checkIn) : null}
             endDate={checkOut ? new Date(checkOut) : null}
             onChange={(value) =>
@@ -114,12 +115,14 @@ export const Filters = ({ initialRegionName }: { initialRegionName?: string }) =
         </FilterInputArea>
         <FilterInputArea label="Who" placeholder="Select..." initialText={labelGuests}>
           <InputSelect
+            name="guests"
             data={guestOptions}
             onChange={(guests) => qs.addQueryString({ guests: guests })}
           />
         </FilterInputArea>
         <FilterInputArea label="Order" placeholder="Select..." initialText={labelOrder}>
           <InputSelect
+            name="order"
             data={orderOptions}
             onChange={(value) => qs.addQueryString({ order: value })}
           />
@@ -127,7 +130,7 @@ export const Filters = ({ initialRegionName }: { initialRegionName?: string }) =
       </UI.Group>
       <UI.Group>
         <FilterInputArea label="Coupon" placeholder="Got a code?">
-          <InputText upperCase />
+          <InputText disabled />
         </FilterInputArea>
       </UI.Group>
     </UI.Wrapper>

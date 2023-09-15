@@ -3,16 +3,18 @@ import { styled } from 'styled-components'
 import { typography } from '~/styles'
 
 type Props = {
+  name?: string
   defaultValue?: string
   data: Array<{ value: string; label: string }>
   onChange?: (value: string) => void
 }
 
-export const InputSelect = ({ defaultValue, data, onChange }: Props) => {
+export const InputSelect = ({ name, defaultValue, data, onChange }: Props) => {
   return (
     <Wrapper>
       <Select
         size="xs"
+        name={name}
         defaultValue={defaultValue}
         data={data}
         maxDropdownHeight={700}

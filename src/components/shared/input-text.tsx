@@ -3,17 +3,18 @@ import { styled } from 'styled-components'
 import { typography } from '~/styles'
 
 type Props = {
-  upperCase?: boolean
+  disabled?: boolean
   defaultValue?: string
   onChange?: (value: string) => void
 }
 
-export const InputText = ({ upperCase, defaultValue, onChange }: Props) => {
+export const InputText = ({ disabled, defaultValue, onChange }: Props) => {
   return (
-    <Wrapper className={upperCase ? 'upper-case' : undefined}>
+    <Wrapper className={disabled ? 'disabled' : undefined}>
       <TextInput
         size="xs"
         defaultValue={defaultValue}
+        disabled={disabled}
         onChange={(e) => onChange?.(e.target.value)}
       />
     </Wrapper>
@@ -23,8 +24,11 @@ export const InputText = ({ upperCase, defaultValue, onChange }: Props) => {
 const Wrapper = styled.div`
   ${typography['text-regular']};
   font-size: 14px;
-  &.upper-case input {
-    text-transform: uppercase;
+  &.disabled {
+    cursor: not-allowed;
+    input {
+      background-color: white;
+    }
   }
   .mantine-Select-item {
     color: #022b54aa;

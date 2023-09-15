@@ -6,21 +6,36 @@ import { MainTitle } from './main-title'
 import { CardHome } from '../card-home'
 import { useHomesAPI } from '~/hooks/homes-api'
 import { HomesNotFound } from '../homes-not-found'
+import { useQueryStringContext } from '~/contexts'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   regionName?: string
 }
 
 export const AppPageHomes = ({ regionName }: Props) => {
-  const { loading, error, total, homes, loadMore } = useHomesAPI({ regionName })
+  const router = useRouter()
+  const { checkIn, checkOut, guests, order } = useQueryStringContext().data
+  const period = checkIn && checkOut ? { checkIn, checkOut } : undefined
+  const query = { regionName, period, guests, order }
+  const { loading, error, total, homes, loadMore } = useHomesAPI(query)
+
+  function handleClickEmptyScreen() {
+    const path = regionName && !error ? `/regions/${regionName}` : `/homes`
+    router.push(path)
+  }
 
   return (
     <UI.Wrapper>
       {error ? (
-        <HomesNotFound pageCenter region={regionName} />
+        <HomesNotFound pageCenter onClick={handleClickEmptyScreen} />
       ) : (
         <>
-          <MainTitle loading={loading} total={total} />
+          {total === 0 && !loading ? (
+            <HomesNotFound pageCenter region={regionName} onClick={handleClickEmptyScreen} />
+          ) : (
+            <MainTitle loading={loading} total={total} />
+          )}
           <UI.Cards>
             {homes.map((home, index) => (
               <React.Fragment key={index.toString() + home.id}>

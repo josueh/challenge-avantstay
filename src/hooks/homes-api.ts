@@ -3,20 +3,32 @@ import { graphql } from './graphql'
 import type { Home } from '~/graphql'
 import { useRegionsAPI } from './regions-api'
 
+const DEFAULT_GUESTS = 2
+const DEFAULT_PAGE = 1
 const PAGE_SIZE = 10
 const PLACEHOLDERS_EMPTY_HOMES = [1, 2, 3].map((i) => ({ id: i }))
 
 type Props = {
   regionName?: string
+  period?: { checkIn: string; checkOut: string }
+  guests?: number | string
+  order?: string
 }
 
-export const useHomesAPI = ({ regionName }: Props) => {
+export const useHomesAPI = ({ regionName, period, guests, order }: Props) => {
   const queryRegions = useRegionsAPI({ regionName })
   const region = queryRegions.selectedRegion
 
   const [page, setPage] = useState(1)
   const { loading, data, fetchMore } = graphql.useQuery('GET_HOMES', {
-    variables: { region: region?.id ?? '', page: 1, pageSize: PAGE_SIZE },
+    variables: {
+      region: region?.id ?? '',
+      period: period ?? { checkIn: '', checkOut: '' },
+      guests: guests ? parseInt('' + guests) : DEFAULT_GUESTS,
+      order: order,
+      page: DEFAULT_PAGE,
+      pageSize: PAGE_SIZE,
+    },
   })
   const error = regionName && !region && !loading ? 'Something went wrong' : null
 
