@@ -25,7 +25,12 @@ export const Center = styled.div`
   margin: 0 auto;
 `
 
-export const Column = styled.div``
+export const Column = styled.div`
+  button {
+    width: 100px;
+    padding: 8px 0;
+  }
+`
 
 export const LogoLink = styled.a`
   display: flex;
