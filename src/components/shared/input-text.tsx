@@ -27,7 +27,8 @@ const Wrapper = styled.div`
   &.disabled {
     cursor: not-allowed;
     input {
-      background-color: white;
+      color: transparent;
+      background-color: transparent;
     }
   }
   .mantine-Select-item {

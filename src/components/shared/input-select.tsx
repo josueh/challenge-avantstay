@@ -34,13 +34,21 @@ const Wrapper = styled.div`
       background-color: #53c3d0;
     }
   }
+  .mantine-Select-input {
+    color: transparent;
+    background-color: transparent;
+  }
   .mantine-Select-rightSection {
     svg {
       display: none;
     }
-    background: no-repeat center 70%;
+    width: 30px;
+    background: no-repeat 30% 70%;
     background-image: url(/icons/arrow-bottom.svg);
     background-size: 16px;
     opacity: 0.3;
+  }
+  [aria-expanded='true'] .mantine-Select-rightSection {
+    transform: scale(1, -1) translate(0, -10px);
   }
 `

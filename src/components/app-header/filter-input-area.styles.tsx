@@ -40,9 +40,12 @@ export const InputArea = styled.div`
     }
   }
   /* mantine or native inputs */
+  &:last-child > label + div {
+    right: 2px;
+  }
   & > label + div {
     position: absolute;
-    inset: 2px;
+    inset: 2px 3px 2px 2px;
     display: flex;
     align-items: flex-end;
     padding: 0;
