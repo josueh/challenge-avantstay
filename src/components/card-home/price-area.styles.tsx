@@ -13,22 +13,26 @@ export const Wrapper = styled.div`
   background-size: 218px 100%;
   &.loading {
     max-width: 98px;
-    overflow: hidden;
     white-space: nowrap;
-    & > div {
-      visibility: hidden;
-    }
+    overflow: hidden;
   }
 `
 export const Group = styled.div`
   display: flex;
   flex-direction: column;
+  .skeleton:last-child {
+    margin-top: 5px;
+  }
 `
 export const Label = styled.div`
   display: flex;
   gap: 2px;
   align-items: center;
   font-size: 12px;
+  & > span {
+    display: inline-block;
+    padding: 0 5px;
+  }
 `
 export const Price = styled.div`
   ${typography['text-bold']};

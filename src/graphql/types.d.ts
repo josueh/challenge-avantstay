@@ -27,3 +27,9 @@ export type Home = {
   hasPool: boolean
   maxOccupancy: number
 }
+
+export type HomePricing = {
+  homeId: string
+  numberOfNights: number
+  total: number
+}

@@ -8,6 +8,7 @@ import { useHomesAPI } from '~/hooks/homes-api'
 import { HomesNotFound } from '../homes-not-found'
 import { useQueryStringContext } from '~/contexts'
 import { useRouter } from 'next/navigation'
+import { usePricesAPI } from '~/hooks/prices-api'
 
 type Props = {
   regionName?: string
@@ -19,6 +20,9 @@ export const AppPageHomes = ({ regionName }: Props) => {
   const period = checkIn && checkOut ? { checkIn, checkOut } : undefined
   const query = { regionName, period, guests, order }
   const { loading, error, total, homes, loadMore } = useHomesAPI(query)
+
+  const homesIds = loading ? [] : homes.map((i) => i.id)
+  const { loading: loadingPrices, pricingByHome } = usePricesAPI({ period, homesIds })
 
   function handleClickEmptyScreen() {
     const path = regionName && !error ? `/regions/${regionName}` : `/homes`
@@ -39,7 +43,12 @@ export const AppPageHomes = ({ regionName }: Props) => {
           <UI.Cards>
             {homes.map((home, index) => (
               <React.Fragment key={index.toString() + home.id}>
-                <CardHome loading={loading} data={home} />
+                <CardHome
+                  loading={loading}
+                  data={home}
+                  loadingPrices={loadingPrices}
+                  pricing={pricingByHome?.[home.id]}
+                />
                 {index + 1 === homes.length ? null : <UI.CardSeparator />}
               </React.Fragment>
             ))}

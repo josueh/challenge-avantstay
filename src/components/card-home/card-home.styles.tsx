@@ -24,13 +24,23 @@ export const Wrapper = styled.section`
   &.loading ${Column} {
     gap: 5px;
   }
-  &.loading ${Column} > div,
-  ${Column} > div.loading {
+  &.loading .skeleton,
+  .loading .skeleton {
     color: transparent;
     background: linear-gradient(90deg, #f7f7f7, #f0f0f0, #f7f7f7);
     background-size: 500px 100%;
     border-radius: 2px;
     animation: ${animSkeletonLoading} 2s infinite;
+    transform-origin: left center;
+    &.short {
+      transform: scale(0.8, 0.8) translate(0, -5px);
+    }
+    &.large {
+      transform: scale(1.2, 0.95);
+    }
+    & > * {
+      visibility: hidden;
+    }
   }
 `
 

@@ -26,7 +26,7 @@ export const Amenities = ({ roomsCount, bathroomsCount, hasPool, maxOccupancy }:
   ].filter((i) => i.text)
 
   return (
-    <UI.Wrapper>
+    <UI.Wrapper className="skeleton large">
       {amenities.map(({ icon, text }) => (
         <div key={text}>
           <Image src={icon} width={24} height={24} alt={text} />

@@ -43,6 +43,7 @@ export const Photos = ({ title, urls }: { title?: string; urls: string[] }) => {
         <Image
           key={imageUrl}
           loader={imageLoader}
+          className="skeleton"
           src={imageUrl}
           alt={title ?? ''}
           width={IMG_WIDTH}

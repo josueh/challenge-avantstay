@@ -11,7 +11,7 @@ export const Wrapper = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  padding: 14px 45px;
+  padding: 14px 30px;
   box-shadow: rgba(117, 122, 135, 0.1) 0px 4px 60px;
   background: white;
 `

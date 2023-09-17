@@ -1,5 +1,15 @@
 import { gql } from '@apollo/client'
 
+export const GET_HOMES_PRICING = gql`
+  query getHomesPricing($ids: [UUID]!, $period: BookingPeriod!) {
+    homesPricing(ids: $ids, period: $period) {
+      homeId
+      numberOfNights
+      total
+    }
+  }
+`
+
 export const GET_HOMES = gql`
   query getHomes(
     $region: UUID

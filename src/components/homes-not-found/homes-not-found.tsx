@@ -1,8 +1,7 @@
 'use client'
 import imgSatellite from '~/assets/satellite.svg'
 import * as UI from './homes-not-found.styles'
-import { ButtonWide } from '../shared'
-import { Animation } from '../shared/animation'
+import { Animation, ButtonWide } from '../shared'
 
 type Props = {
   pageCenter?: boolean
