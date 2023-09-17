@@ -1,6 +1,7 @@
 # Challenge AvantStay
 
-The task: *implement a simplified version of the company's search and home details screens.*
+**The task:** *implement a simplified version of the company's search and home details screens.*
+
 
 ### Development
 
@@ -22,3 +23,9 @@ To execute unit and e2e tests, run the following commands, respectively:
 npm run test:unit
 npm run test:e2e
 ```
+
+### Some tools
+
+`GitHub Actions`, `Vercel`  
+`TypeScript`, `React`, `NEXT`, `Apollo Client`, `Context API`, `styled-component`, `mantine`  
+`Jest`, `Cypress`  
