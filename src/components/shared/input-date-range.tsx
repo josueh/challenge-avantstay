@@ -37,7 +37,8 @@ const Wrapper = styled.div`
     color: #022b54aa;
   }
   .mantine-DatePickerInput-input {
-    background-color: white;
+    color: transparent;
+    background-color: transparent;
   }
   .mantine-DatePickerInput-day {
     color: #022b54;

@@ -8,12 +8,12 @@ import { FilterInputArea } from './filter-input-area'
 import { InputSelect } from '../shared/input-select'
 import { InputDateRange } from '../shared/input-date-range'
 import { InputText } from '../shared/input-text'
-import { convertToLocalDate, convertToSQLDate } from '~/lib/date'
+import { convertToSQLDate, formatRangePeriod } from '~/lib/date'
 
 const DEFAULT_REGION = 'Any region'
 
 const orderOptions = [
-  { value: 'RELEVANCE', label: 'Relevance' },
+  { value: 'RELEVANCE', label: 'Relevance', default: true },
   { value: 'PRICE_ASC', label: 'Lowest price first' },
   { value: 'PRICE_DESC', label: 'Highest price first' },
 ]
@@ -39,7 +39,8 @@ type BookingPeriod = {
 export const Filters = ({ initialRegionName }: { initialRegionName?: string }) => {
   const router = useRouter()
   const qs = useQueryStringContext()
-  const { checkIn, checkOut, guests, order } = qs.data
+  const { checkIn, checkOut, guests } = qs.data
+  const order = qs.data.order ?? orderOptions.find((i) => i.default)?.value
 
   function setBookingPeriod({ checkIn, checkOut }: BookingPeriod) {
     if (!checkIn === !checkOut) {
@@ -51,7 +52,7 @@ export const Filters = ({ initialRegionName }: { initialRegionName?: string }) =
   }
   const labelPeriod = useMemo(() => {
     if (checkIn && checkOut) {
-      return convertToLocalDate(checkIn) + ` - ` + convertToLocalDate(checkOut)
+      return formatRangePeriod(checkIn, checkOut)
     }
   }, [checkIn, checkOut])
 
@@ -124,6 +125,7 @@ export const Filters = ({ initialRegionName }: { initialRegionName?: string }) =
           <InputSelect
             name="order"
             data={orderOptions}
+            defaultValue={order}
             onChange={(value) => qs.addQueryString({ order: value })}
           />
         </FilterInputArea>

@@ -4,6 +4,7 @@ import type { Home } from '~/graphql'
 import { useRegionsAPI } from './regions-api'
 
 const DEFAULT_GUESTS = 2
+const DEFAULT_ORDER = 'RELEVANCE'
 const DEFAULT_PAGE = 1
 const PAGE_SIZE = 10
 const PLACEHOLDERS_EMPTY_HOMES = [1, 2, 3].map((i) => ({ id: i }))
@@ -25,7 +26,7 @@ export const useHomesAPI = ({ regionName, period, guests, order }: Props) => {
       region: region?.id ?? '',
       period: period ?? { checkIn: '', checkOut: '' },
       guests: guests ? parseInt('' + guests) : DEFAULT_GUESTS,
-      order: order,
+      order: order ?? DEFAULT_ORDER,
       page: DEFAULT_PAGE,
       pageSize: PAGE_SIZE,
     },
