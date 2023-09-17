@@ -5,17 +5,15 @@ import { useQueryStringContext } from '~/contexts'
 import * as UI from './filters.styles'
 import { useRegionsAPI } from '~/hooks/regions-api'
 import { FilterInputArea } from './filter-input-area'
-import { InputSelect } from '../shared/input-select'
-import { InputDateRange } from '../shared/input-date-range'
-import { InputText } from '../shared/input-text'
+import { InputText, InputSelect, InputDateRange } from '../shared'
 import { convertToSQLDate, formatRangePeriod } from '~/lib/date'
 
 const DEFAULT_REGION = 'Any region'
 
 const orderOptions = [
   { value: 'RELEVANCE', label: 'Relevance', default: true },
-  { value: 'PRICE_ASC', label: 'Lowest price first' },
-  { value: 'PRICE_DESC', label: 'Highest price first' },
+  { value: 'PRICE_ASC', label: 'Price: lowest first' },
+  { value: 'PRICE_DESC', label: 'Price: highest first' },
 ]
 
 const guestOptions = [
